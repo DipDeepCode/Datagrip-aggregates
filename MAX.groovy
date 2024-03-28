@@ -34,6 +34,6 @@ if (values.size() == 0) {
 DecimalFormat decimalFormat = new DecimalFormat("#,###.###")
 String formattedResult = decimalFormat
         .format(Collections.max(values))
-        .replaceAll(" ", " ")
+        .replaceAll(" ", " ") // \u00a0 -> \u0020
         .replaceAll(",", ".")
 OUT.append(formattedResult)

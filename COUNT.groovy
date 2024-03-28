@@ -23,6 +23,6 @@ ROWS.each { row ->
 DecimalFormat decimalFormat = new DecimalFormat("#,###.###")
 String formattedResult = decimalFormat
         .format(RES)
-        .replaceAll(" ", " ")
+        .replaceAll(" ", " ") // \u00a0 -> \u0020
         .replaceAll(",", ".")
 OUT.append(formattedResult)

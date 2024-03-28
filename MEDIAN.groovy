@@ -44,6 +44,6 @@ RES = elementsNumber % 2 != 0 ? values[mid] : values[mid].add(values[mid - 1], D
 DecimalFormat decimalFormat = new DecimalFormat("#,###.###")
 String formattedResult = decimalFormat
         .format(RES)
-        .replaceAll(" ", " ")
+        .replaceAll(" ", " ") // \u00a0 -> \u0020
         .replaceAll(",", ".")
 OUT.append(formattedResult)

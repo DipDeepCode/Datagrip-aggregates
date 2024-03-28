@@ -17,6 +17,6 @@ import java.text.DecimalFormat
 DecimalFormat decimalFormat = new DecimalFormat("#,###.###")
 String formattedResult = decimalFormat
         .format(ROWS.size() as BigDecimal)
-        .replaceAll(" ", " ")
+        .replaceAll(" ", " ") // \u00a0 -> \u0020
         .replaceAll(",", ".")
 OUT.append(formattedResult)
