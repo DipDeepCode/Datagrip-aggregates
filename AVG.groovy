@@ -1,3 +1,7 @@
+import java.text.DecimalFormat
+
+import static java.math.MathContext.DECIMAL128
+
 /*
  * Available context bindings:
  *   COLUMNS     List<DataColumn>
@@ -12,15 +16,13 @@
  *   DataColumn  { columnNumber(), name() }
  */
 
-import static java.math.MathContext.DECIMAL128
-
 BigDecimal RES = 0
 int i = 0
 ROWS.each { row ->
   COLUMNS.each { column ->
     def value = row.value(column)
     if (value instanceof Number) {
-      RES = RES.add(value, DECIMAL128)
+      RES = RES.add(value as BigDecimal, DECIMAL128)
       i++
     }
     else if (value.toString().isBigDecimal()) {
@@ -30,8 +32,13 @@ ROWS.each { row ->
   }
 }
 if (i > 0) {
-  RES = RES.divide(i, DECIMAL128)
-  OUT.append(RES.toString())
+  RES = RES.divide(i as BigDecimal, DECIMAL128)
+  DecimalFormat decimalFormat = new DecimalFormat("#,###.###")
+  String formattedResult = decimalFormat
+          .format(RES)
+          .replaceAll(" ", " ")
+          .replaceAll(",", ".")
+  OUT.append(formattedResult)
 }
 else {
   OUT.append("Not enough values")

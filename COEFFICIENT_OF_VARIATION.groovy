@@ -38,16 +38,16 @@ if (values.isEmpty()) {
 
 def sum = BigDecimal.ZERO
 values.forEach { value ->
-  sum = sum.add(value, DECIMAL128)
+  sum = sum.add(value as BigDecimal, DECIMAL128)
 }
-def avg = sum.divide(values.size(), DECIMAL128)
+def avg = sum.divide(values.size() as BigDecimal, DECIMAL128)
 def sumSquaredDiff = BigDecimal.ZERO
 values.each { value ->
   BigDecimal diff = value.subtract(avg, DECIMAL128)
   sumSquaredDiff = sumSquaredDiff.add(diff.multiply(diff, DECIMAL128), DECIMAL128)
 }
 
-def variance = sumSquaredDiff.divide(values.size(), DECIMAL128)
+def variance = sumSquaredDiff.divide(values.size() as BigDecimal, DECIMAL128)
 def standardDeviation = variance.sqrt(DECIMAL128)
-def cv = standardDeviation.divide(avg, DECIMAL128)
+def cv = standardDeviation.divide(avg as BigDecimal, DECIMAL128)
 OUT.append((cv * 100).round(2) + "%")

@@ -1,3 +1,5 @@
+import java.text.DecimalFormat
+
 /*
 * Available context bindings:
 *   COLUMNS     List<DataColumn>
@@ -18,4 +20,9 @@ ROWS.each { row ->
     RES += 1
   }
 }
-OUT.append(RES.toString())
+DecimalFormat decimalFormat = new DecimalFormat("#,###.###")
+String formattedResult = decimalFormat
+        .format(RES)
+        .replaceAll(" ", " ")
+        .replaceAll(",", ".")
+OUT.append(formattedResult)

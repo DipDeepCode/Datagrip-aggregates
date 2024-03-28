@@ -1,3 +1,5 @@
+import java.text.DecimalFormat
+
 /*
  * Available context bindings:
  *   COLUMNS     List<DataColumn>
@@ -12,4 +14,9 @@
  *   DataColumn  { columnNumber(), name() }
  */
 
-OUT.append(COLUMNS.size().toString())
+DecimalFormat decimalFormat = new DecimalFormat("#,###.###")
+String formattedResult = decimalFormat
+        .format(COLUMNS.size() as BigDecimal)
+        .replaceAll(" ", " ")
+        .replaceAll(",", ".")
+OUT.append(formattedResult)

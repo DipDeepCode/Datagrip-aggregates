@@ -1,3 +1,7 @@
+import java.text.DecimalFormat
+
+import static java.math.MathContext.DECIMAL128
+
 /*
  * Available context bindings:
  *   COLUMNS     List<DataColumn>
@@ -11,8 +15,6 @@
  *   DataRow     { rowNumber(); first(); last(); data(): List<Object>; value(column): Object }
  *   DataColumn  { columnNumber(), name() }
  */
-
-import static java.math.MathContext.DECIMAL128
 
 def toBigDecimal = { value ->
   value instanceof Number ? value as BigDecimal :
@@ -39,4 +41,9 @@ elementsNumber = values.size()
 Collections.sort(values)
 mid = (int)elementsNumber / 2
 RES = elementsNumber % 2 != 0 ? values[mid] : values[mid].add(values[mid - 1], DECIMAL128).divide(2, DECIMAL128)
-OUT.append(RES.toString())
+DecimalFormat decimalFormat = new DecimalFormat("#,###.###")
+String formattedResult = decimalFormat
+        .format(RES)
+        .replaceAll(" ", " ")
+        .replaceAll(",", ".")
+OUT.append(formattedResult)

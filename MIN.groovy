@@ -1,3 +1,5 @@
+import java.text.DecimalFormat
+
 /*
  * Available context bindings:
  *   COLUMNS     List<DataColumn>
@@ -28,4 +30,9 @@ if (values.size() == 0) {
   OUT.append("Not enough values")
   return
 }
-OUT.append(Collections.min(values).toString())
+DecimalFormat decimalFormat = new DecimalFormat("#,###.###")
+String formattedResult = decimalFormat
+        .format(Collections.min(values))
+        .replaceAll(" ", " ")
+        .replaceAll(",", ".")
+OUT.append(formattedResult)
